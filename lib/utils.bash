@@ -3,8 +3,8 @@
 set -euo pipefail
 
 GH_REPO="https://github.com/dbrgn/tealdeer"
-TOOL_NAME="tealdeer"
-TOOL_TEST="tealdeer --version"
+TOOL_NAME="tldr"
+TOOL_TEST="tldr"
 
 fail() {
 	echo -e "asdf-$TOOL_NAME: $*"
