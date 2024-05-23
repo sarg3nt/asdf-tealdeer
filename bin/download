@@ -13,7 +13,8 @@ mkdir -p "$ASDF_DOWNLOAD_PATH"
 ## url="$GH_REPO/releases/download/v${version}/tealdeer-linux-x86_64-musl"
 
 # TODO: Adapt this to proper extension and adapt extracting strategy.
-release_file="tealdeer"
+#release_file="tealdeer"
+release_file="$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION"
 
 # Download tar.gz file to the download directory
 download_release "$ASDF_INSTALL_VERSION" "$release_file"
@@ -22,4 +23,13 @@ download_release "$ASDF_INSTALL_VERSION" "$release_file"
 chmod +x "$release_file"
 
 # Move the file
-mv "$release_file" "$ASDF_DOWNLOAD_PATH"
+mv "$release_file" "$ASDF_DOWNLOAD_PATH/"
+
+
+# #  Extract contents of tar.gz file into the download directory
+# tar -xzf "$release_file" -C "$ASDF_DOWNLOAD_PATH" --strip-components=1 || fail "Could not extract $release_file"
+
+# # Remove the tar.gz file since we don't need to keep it
+# rm "$release_file"
+
+
