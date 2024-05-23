@@ -86,6 +86,7 @@ download_release() {
 	url="$GH_REPO/releases/download/v${version}/${downloadname}"
 
 	echo "* Downloading $downloadname release $version..."
+	#    * Downloading asdf-tldr: Unknown or unsupported platform macos-arm64 detected. release 1.6.1...
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 	chmod +x "$filename"
 }
