@@ -33,13 +33,57 @@ list_all_versions() {
 	list_github_tags
 }
 
+get_platform() {
+	local -r kernel="$(uname -s)"
+	if [[ ${OSTYPE} == "msys" || ${kernel} == "CYGWIN"* || ${kernel} == "MINGW"* ]]; then
+		echo windows
+	elif [[ ${kernel} == "Darwin" ]]; then
+		echo macos
+	else
+		uname | tr '[:upper:]' '[:lower:]'
+	fi
+}
+
+get_arch() {
+	local -r machine="$(uname -m)"
+
+	if [[ ${machine} == "arm64" ]] || [[ ${machine} == "aarch64" ]]; then
+		echo "arm64"
+	elif [[ ${machine} == "arm" ]] ; then
+		echo "armv7"
+	elif [[ ${machine} == *"armv"* ]] || [[ ${machine} == *"aarch"* ]]; then
+		echo "arm"
+	elif [[ ${machine} == *"386"* ]]; then
+		echo "386"
+	else
+		echo "x86_64"
+	fi
+}
+
+get_download_name() {
+	local -r platform="$(get_platform)"
+	local -r arch="$(get_arch)"
+
+	if [[ ${platform} == "linux" ]] &&  [[ ${arch} == "arm" ]]; then
+		echo "tealdeer-linux-arm-musleabihf"
+	elif [[ ${platform} == "macos" ]] &&  [[ ${arch} == "x86_64" ]]; then
+		echo "tealdeer-macos-x86_64"
+	elif [[ ${platform} == "linux" ]] &&  [[ ${arch} == "arm" ]]; then
+		echo "tealdeer-linux-arm-musleabihf"
+	elif [[ ${platform} == "linux" ]] &&  [[ ${arch} == "armv7" ]]; then
+		echo "tealdeer-linux-armv7-musleabihf"
+	elif [[ ${platform} == "windows" ]] &&  [[ ${arch} == "x86_64" ]]; then
+		echo "tealdeer-windows-x86_64-msvc.exe"
+}
+
 download_release() {
 	local version filename url
 	version="$1"
 	filename="$2"
-	url="$GH_REPO/releases/download/v${version}/tealdeer-linux-x86_64-musl"
+	local -r downloadname="$(get_download_name)"
+	url="$GH_REPO/releases/download/v${version}/${downloadname}"
 
-	echo "* Downloading $TOOL_NAME release $version..."
+	echo "* Downloading $downloadname release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 	chmod +x "$filename"
 }
