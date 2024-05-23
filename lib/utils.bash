@@ -58,7 +58,7 @@ install_version() {
 	(
 		mkdir -p "$install_path"
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
-		mv "${TOOL_NAME}-${version}" "${TOOL_NAME}"
+		mv "$install_path/${TOOL_NAME}-${version}" "$install_path/${TOOL_NAME}"
 
 		# TODO: Assert tealdeer executable exists.
 		local tool_cmd
