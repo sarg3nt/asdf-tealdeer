@@ -4,7 +4,7 @@ set -euo pipefail
 
 GH_REPO="https://github.com/dbrgn/tealdeer"
 TOOL_NAME="tealdeer"
-TOOL_TEST="tealdeer"
+TOOL_TEST="tealdeer --version"
 
 fail() {
 	echo -e "asdf-$TOOL_NAME: $*"
@@ -60,8 +60,10 @@ install_version() {
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 		mv "$install_path/${TOOL_NAME}-${version}" "$install_path/${TOOL_NAME}"
 
-
-		test -x "$install_path/${TOOL_NAME} --version" || fail "Expected $install_path/$tool_cmd to be executable."
+		# TODO: Assert tealdeer executable exists.
+		local tool_cmd
+		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+		test -x "$install_path/${TOOL_TEST}" || fail "Expected $install_path/$tool_cmd to be executable."
 
 		echo "$TOOL_NAME $version installation was successful!"
 	) || (
