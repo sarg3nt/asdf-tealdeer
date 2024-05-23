@@ -8,7 +8,6 @@
 
 # Contents
 
-- [Dependencies](#dependencies)
 - [Install](#install)
 - [Contributing](#contributing)
 - [License](#license)
