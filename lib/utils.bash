@@ -63,6 +63,8 @@ install_version() {
 		# TODO: Assert tealdeer executable exists.
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+		ls -alh "$install_path/${tool_cmd}"
+		"$install_path/${tool_cmd}" --version
 		test -x "$install_path/${tool_cmd} --version" || fail "Expected $install_path/$tool_cmd to be executable."
 
 		echo "$TOOL_NAME $version installation was successful!"
