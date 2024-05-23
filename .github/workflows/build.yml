@@ -10,13 +10,16 @@ jobs:
   plugin_test:
     name: asdf plugin test
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-latest
           - windows-latest
+          - macos-14
+          #- macos-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: asdf_plugin_test
-        uses: asdf-vm/actions/plugin-test@v2
+        uses: asdf-vm/actions/plugin-test@v3
         with:
           command: tldr --version
