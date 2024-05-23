@@ -23,7 +23,7 @@ download_release "$ASDF_INSTALL_VERSION" "$release_file"
 chmod +x "$release_file"
 
 # Move the file
-mv "$release_file" "$ASDF_DOWNLOAD_PATH/"
+#mv "$release_file" "$ASDF_DOWNLOAD_PATH/"
 
 
 # #  Extract contents of tar.gz file into the download directory
