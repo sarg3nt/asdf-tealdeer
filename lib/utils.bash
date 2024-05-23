@@ -49,7 +49,7 @@ get_arch() {
 
 	if [[ ${machine} == "arm64" ]] || [[ ${machine} == "aarch64" ]]; then
 		echo "arm64"
-	elif [[ ${machine} == "arm" ]] ; then
+	elif [[ ${machine} == "arm" ]]; then
 		echo "armv7"
 	elif [[ ${machine} == *"armv"* ]] || [[ ${machine} == *"aarch"* ]]; then
 		echo "arm"
@@ -63,17 +63,17 @@ get_arch() {
 get_download_name() {
 	local -r platform="$(get_platform)"
 	local -r arch="$(get_arch)"
-	if [[ ${platform} == "linux" ]] &&  [[ ${arch} == "x86_64" ]]; then
+	if [[ ${platform} == "linux" ]] && [[ ${arch} == "x86_64" ]]; then
 		echo "tealdeer-linux-x86_64-musl"
-	elif [[ ${platform} == "macos" ]] &&  [[ ${arch} == "x86_64" ]]; then
+	elif [[ ${platform} == "macos" ]] && [[ ${arch} == "x86_64" ]]; then
 		echo "tealdeer-macos-x86_64"
-	elif [[ ${platform} == "linux" ]] &&  [[ ${arch} == "arm" ]]; then
+	elif [[ ${platform} == "linux" ]] && [[ ${arch} == "arm" ]]; then
 		echo "tealdeer-linux-arm-musleabihf"
-	elif [[ ${platform} == "linux" ]] &&  [[ ${arch} == "armv7" ]]; then
+	elif [[ ${platform} == "linux" ]] && [[ ${arch} == "armv7" ]]; then
 		echo "tealdeer-linux-armv7-musleabihf"
-	elif [[ ${platform} == "windows" ]] &&  [[ ${arch} == "x86_64" ]]; then
+	elif [[ ${platform} == "windows" ]] && [[ ${arch} == "x86_64" ]]; then
 		echo "tealdeer-windows-x86_64-msvc.exe"
-	else 
+	else
 		fail "Unknown or unsupported platform ${platform}-${arch} detected."
 	fi
 }
