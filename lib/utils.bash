@@ -4,7 +4,7 @@ set -euo pipefail
 
 GH_REPO="https://github.com/dbrgn/tealdeer"
 TOOL_NAME="tldr"
-TOOL_TEST="tldr"
+TOOL_TEST="tldr --version"
 
 fail() {
 	echo -e "asdf-$TOOL_NAME: $*"
@@ -13,7 +13,6 @@ fail() {
 
 curl_opts=(-fsSL)
 
-# NOTE: You might want to remove this if tealdeer is not hosted on GitHub releases.
 if [ -n "${GITHUB_API_TOKEN:-}" ]; then
 	curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
 fi
@@ -86,7 +85,7 @@ download_release() {
 	url="$GH_REPO/releases/download/v${version}/${downloadname}"
 
 	echo "* Downloading $downloadname release $version..."
-	#    * Downloading asdf-tldr: Unknown or unsupported platform macos-arm64 detected. release 1.6.1...
+
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 	chmod +x "$filename"
 }
