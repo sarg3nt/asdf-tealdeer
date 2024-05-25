@@ -15,9 +15,9 @@ jobs:
         os:
           # See: https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
           - ubuntu-latest
-          # - windows-latest # broken
           - macos-12 # Intel
-          #- macos-latest # m1, not supported by tealdeer yet.
+          #- macos-latest # M series, not supported by tealdeer yet.
+          # - windows-latest # broken
     runs-on: ${{ matrix.os }}
     steps:
       - name: asdf_plugin_test
