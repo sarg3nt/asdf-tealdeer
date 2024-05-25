@@ -17,7 +17,6 @@ jobs:
           - ubuntu-latest
           - macos-12 # Intel
           #- macos-latest # M series, not supported by tealdeer yet.
-          # - windows-latest # broken
     runs-on: ${{ matrix.os }}
     steps:
       - name: asdf_plugin_test
