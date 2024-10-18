@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-GH_REPO="https://github.com/dbrgn/tealdeer"
+GH_REPO="https://github.com/tealdeer-rs/tealdeer"
 TOOL_NAME="tldr"
 TOOL_TEST="tldr --version"
 
@@ -58,7 +58,6 @@ get_arch() {
 		echo "x86_64"
 	fi
 }
-
 get_download_name() {
 	local -r platform="$(get_platform)"
 	local -r arch="$(get_arch)"
